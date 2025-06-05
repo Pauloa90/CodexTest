@@ -9,4 +9,4 @@ Este repositório contém uma estrutura inicial para o projeto **Tenda dos Peque
 - `config.gs` - Chaves de API e configurações de acesso.
 - `triggers.gs` - Disparo automático de ações ao editar o Google Sheets.
 
-As funções estão descritas de forma resumida e ainda precisam de implementação completa.
+Algumas funções já trazem chamadas reais às APIs, mas o fluxo ainda demanda ajustes e integração com o Google Sheets.

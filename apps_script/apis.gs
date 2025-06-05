@@ -10,9 +10,24 @@ function chamarOpenAIAssistant(prompt, tipo) {
   const url = 'https://api.openai.com/v1/chat/completions';
   const payload = {
     model: 'gpt-4',
-    messages: [{ role: 'system', content: 'Instruções do assistant...' }]
+    messages: [
+      { role: 'system', content: 'Instruções do assistant...' },
+      { role: 'user', content: prompt }
+    ]
   };
-  // TODO: Complete HTTP request and return parsed response
+
+  const options = {
+    method: 'post',
+    contentType: 'application/json',
+    headers: {
+      Authorization: 'Bearer ' + getConfig('OPENAI_API_KEY')
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  const response = UrlFetchApp.fetch(url, options);
+  return JSON.parse(response.getContentText());
 }
 
 /**
@@ -33,7 +48,17 @@ function chamarPIAPIMidjourney(prompt, mode) {
       aspect_ratio: '16:9'
     }
   };
-  // TODO: Complete HTTP request and return task information
+
+  const options = {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'x-api-key': getConfig('PIAPI_KEY') },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  const response = UrlFetchApp.fetch(url, options);
+  return JSON.parse(response.getContentText());
 }
 
 /**
@@ -56,7 +81,17 @@ function chamarPIAPIKling(config) {
       lip_sync: true
     }
   };
-  // TODO: Complete HTTP request and return task information
+
+  const options = {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'x-api-key': getConfig('PIAPI_KEY') },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  const response = UrlFetchApp.fetch(url, options);
+  return JSON.parse(response.getContentText());
 }
 
 /**
@@ -67,5 +102,22 @@ function chamarPIAPIKling(config) {
  * @return {string} URL of generated audio
  */
 function chamarTopMediaiTTS(texto, vozId, velocidade) {
-  // TODO: Implement TopMediai integration and return audio URL
+  const url = 'https://api.topmediai.com/tts';
+  const payload = {
+    text: texto,
+    voice_id: vozId,
+    speed: velocidade
+  };
+
+  const options = {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'x-api-key': getConfig('TOPMEDIAI_KEY') },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  const response = UrlFetchApp.fetch(url, options);
+  const data = JSON.parse(response.getContentText());
+  return data.url || '';
 }
