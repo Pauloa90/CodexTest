@@ -10,3 +10,7 @@ Este repositório contém uma estrutura inicial para o projeto **Tenda dos Peque
 - `triggers.gs` - Disparo automático de ações ao editar o Google Sheets.
 
 Algumas funções já trazem chamadas reais às APIs, mas o fluxo ainda demanda ajustes e integração com o Google Sheets.
+
+## Variáveis de ambiente
+
+Defina `PIAPI_KEY` como um segredo do GitHub ou variável de ambiente local para que o script `kling_flow.py` consiga acessar a PIAPI.
